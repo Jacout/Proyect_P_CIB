@@ -3,7 +3,8 @@ import requests
 if __name__ == "__main__":
     #buscar 
     #mod_reques()
-
+    
+    print("Menu")
     url = input("Ingree una URL")
     r = requests.get(url)
     print(r.status_code)
