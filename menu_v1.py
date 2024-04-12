@@ -1,23 +1,4 @@
-def module1():
-    import module1
-    module1.function1()
-
-def module2():
-    import module2
-    module2.function2()
-
-def module3():
-    import module3
-    module3.function3()
-
-def module4():
-    import module4
-    module4.function4()
-
-def module5():
-    import module5
-    module5.function5()
-
+import mod_escaner, module_infodom, module_nmpa, module_pdf, mod_reques, mod_dataimagenes, CrackeoCesar
 def menu():
     print("Bienvenido")
     print("Select a module:")
@@ -25,18 +6,24 @@ def menu():
     print("2. Escaner de puertos")
     print("3. Metadatos PDF")
     print("4. Metadatos imagenes")
-    print("5. NMAP")
+    print("5. Crackeo")
     choice = int(input("Enter the number of your choice: "))
     if choice == 1:
-        module1()
+        mod_reques()
     elif choice == 2:
-        module2()
+        #agregar para elegir entre dos modulos
+        print("1. Escaner de puertos \n 2. Escaner NMPA")
+        choice = int(input("Enter the number of your choice: "))
+        if choice == 1:
+            mod_escaner()
+        else:
+            module_nmpa()
     elif choice == 3:
-        module3()
+        module_pdf()
     elif choice == 4:
-        module4()
+        mod_dataimagenes()
     elif choice == 5:
-        module5()
+        CrackeoCesar()
     else:
         print("Invalid choice.")
 if __name__== "__main__":
