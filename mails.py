@@ -10,5 +10,7 @@ if response.status_code != 200:
 # a set of crawled emails
 regExMail = r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+"
 new_emails = set(re.findall(regExMail, response.text, re.I))
+
+file = open("correos.txt","w")
 for i in new_emails:
-    print(i)
+    file.write(i + "\n")
