@@ -2,26 +2,53 @@ import argparse
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="")
-    parser.add_argument("-p","-process", dest="tarea", type=str, choices=[], help="accion a realizar") #SE DEFINE EL PROCESO A REALIZAR
+    descripcion = """EJEMPLOS DE USO
+        + Realizacion de todas las tareas
+        -accion all -objetivo <sitio web>
+        + Realizacion de solo una tarea especificadas
+        -accion web_scrapping -objetivo <sitio web>
+        + Realizacion de algunas tareas especificadas:
+        -accion web_scrapping,escaneo_puertos,metadatos -objetivo <sitio web>
+        Procesos disponibles:
+        web_scraping 
+        escaneo_puertos 
+        metadatos 
+        hash 
+        correos
+        api"""
+    parser = argparse.ArgumentParser(description='Script para investigacion web',epilog=descripcion,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
     # Definir el primer argumento que se puede usar para realizar 5 acciones
-    parser.add_argument('-a', '--acción', type=str, help='Elegir una de las 5 acciones para realizar')
-
-    # Definir los otros 5 argumentos que se pueden usar para realizar algunas o solo una acción
-    parser.add_argument('-w', '--webscraping', type=int, help='Argumento para realizar web scraping')
-    parser.add_argument('-i', '--ip', type=str, help='Argumento para escanear puertos e ip')
-    parser.add_argument('-m', '--metadatos', type=float, help='Argumento para acción3')
-    parser.add_argument('-e', '--arg4', type=bool, help='Argumento para acción4')
-    parser.add_argument('-f', '--arg5', type=str, help='Argumento para acción5')
-    parser.add_argument("-t","-target", dest="target", help="target")
+    parser.add_argument('-accion', dest='acciones', 
+                        type=str, help='Especificar los procesos a realizar [all default]', default= 'all')
+    parser.add_argument('-objetivo', dest='objetivo',type=str, help="Sitio objetivo", required=True)
     args = parser.parse_args()
-
     
-    
-    #if (dest  = "all"):
+    if args.acciones == "all": #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos
+        print("Realizando todas las acciones")
+    else:
+        acciones_especificas = args.acciones.split(",")
+        print(acciones_especificas)
         
-        #haga todo
-        
+        #accion web_scrapping escaneo_puertos metadatos hash correos api
+        for accion in acciones_especificas:
+            if accion == "web_scraping":
+                print("Realizando web scraping")
+            if accion == "escaneo_puertos":
+                print("Realizando Escaneo de puertos")
+            if accion == "metadatos":
+                print("Realizar metadatos de archivos , verificando si hay archivos")
+            if accion == "hash":
+                print("Realizar sacar el valor hash de los archivos de descarga como los generados por reportes")
+            if accion == "correos":
+                print("Chequeo de correos con Virus total")
+            if accion == "api":
+                print("Accion a realizar con las API")
+                
+    #en base a la informacion recolectada se realizan los reportes
+    #se manda a llamar a los modulos de generacion de reportes
+    #se exporta la informacion en una carpeta de este proyecto
+    print("Objetivo:", args.objetivo)
         
     
     #web scraping opcional
@@ -30,27 +57,9 @@ if __name__ == "__main__":
     #hash obligatorio, checar si tienen los archivos
     #Virus total en base al chequeo de los correos
     #y api que van a usar dependiendo opcional tambien
-    #hacer un argumento de tarea que ejecute solo los que se le indiquen
     
     
     #Si seleccion all ejecute todo
     
     
     import argparse
-
-parser = argparse.ArgumentParser(description='Realizar acciones usando argumentos')
-
-
-# Realizar acciones basadas en los argumentos proporcionados
-if args.acción == 'acción1':
-    print(f'Realizando acción1 con argumento {args.arg1}')
-elif args.acción == 'acción2':
-    print(f'Realizando acción2 con argumento {args.arg2}')
-elif args.acción == 'acción3':
-    print(f'Realizando acción3 con argumento {args.arg3}')
-elif args.acción == 'acción4':
-    print(f'Realizando acción4 con argumento {args.arg4}')
-elif args.acción == 'acción5':
-    print(f'Realizando acción5 con argumento {args.arg5}')
-else:
-    print('No se especificó ninguna acción. Por favor, proporcione una acción usando la opción -a o --acción.')
