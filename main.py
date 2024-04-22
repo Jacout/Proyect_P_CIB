@@ -22,6 +22,9 @@ if __name__ == "__main__":
     parser.add_argument('-accion', dest='acciones', 
                         type=str, help='Especificar los procesos a realizar [all default]', default= 'all')
     parser.add_argument('-objetivo', dest='objetivo',type=str, help="Sitio objetivo", required=True)
+    parser.add_argument("-ports", dest="ports", #Parametro de puertos con valor de default
+                        help="Please specify the target ports separated by coma[80,8080 by default]", 
+                        default = "80,8080")
     args = parser.parse_args()
     
     if args.acciones == "all": #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos
