@@ -1,13 +1,10 @@
 import requests
 import re
 
-url = 'https://www.themoscowtimes.com/page/moscow-times'
-
-response = requests.get(url)
+response = requests.get(target)
 if response.status_code != 200:
     exit()
-
-# a set of crawled emails
+#obtiene las urls
 regExMail = r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+"
 new_emails = set(re.findall(regExMail, response.text, re.I))
 
