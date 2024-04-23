@@ -1,5 +1,5 @@
 import argparse
-
+import portsv2
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -39,6 +39,7 @@ if __name__ == "__main__":
                 print("Realizando web scraping")
             if accion == "escaneo_puertos":
                 print("Realizando Escaneo de puertos")
+                portsv2.escaneo(args.objetivo)
             if accion == "metadatos":
                 print("Realizar metadatos de archivos , verificando si hay archivos")
             if accion == "hash":
