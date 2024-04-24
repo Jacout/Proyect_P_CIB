@@ -1,7 +1,7 @@
 import requests
 import api_keys
 
-
+#Cambios para realizar: Hacer que se guarde en un archivo txt, la fecha, hora, el dominio y la respusta del dominio(24/04/2024)
 #Api consumida de VT, apiket guardad en un archivo de python
 def get_domain_report(domain):
     url = f"https://www.virustotal.com/api/v3/domains/{domain}"
