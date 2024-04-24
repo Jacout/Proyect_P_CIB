@@ -5,7 +5,7 @@ import api_keys
 #Cambiar a url
 def get_domain_report(domain):
     url = f"https://www.virustotal.com/api/v3/domains/{domain}"
-    headers = {"accept": "application/json", "x-apikey": api_keys.api_k()}
+    headers = {"accept": "application/json", "x-apikey": api_keys.api_key}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         return response.json()
