@@ -2,7 +2,7 @@ import requests
 import api_keys
 
 
-#Cambiar a url
+#Api consumida de VT, apiket guardad en un archivo de python
 def get_domain_report(domain):
     url = f"https://www.virustotal.com/api/v3/domains/{domain}"
     headers = {"accept": "application/json", "x-apikey": api_keys.api_key}
@@ -12,7 +12,7 @@ def get_domain_report(domain):
     else:
         print(f"Error: {response.status_code}")
         return None
-
+#Utilizamos los parametros que nos brinda VT para verificar si el dominio es seguro o malicioso
 def is_domain_safe(domain):
     report = get_domain_report(domain)
     if report:
@@ -21,7 +21,10 @@ def is_domain_safe(domain):
             return True
     return False
 
-domain = 'uanl.mx'
+
+#Prueba con dominio no seguro
+#Para dominio seguro puedes probar con el de uanl.mx
+domain = 'vansemexicos.com'
 if is_domain_safe(domain):
     print(f'El dominio {domain} es seguro.')
 else:
