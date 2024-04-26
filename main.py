@@ -1,5 +1,6 @@
 import argparse
 import Modulos.portsv2 as portsv2
+import Modulos.Scraping as scrap
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -37,16 +38,15 @@ if __name__ == "__main__":
         #accion web_scrapping escaneo_puertos metadatos hash correos api
         for accion in acciones_especificas:
             if accion == "web_scraping":
-                print("Realizando web scraping")
+                scrap.obtener(args.objetivo)
             if accion == "escaneo_puertos":
-                print("Realizando Escaneo de puertos")
                 portsv2.escaneo(args.objetivo,puertos)
             if accion == "metadatos":
                 print("Realizar metadatos de archivos , verificando si hay archivos")
             if accion == "hash":
                 print("Realizar sacar el valor hash de los archivos de descarga como los generados por reportes")
             if accion == "correos":
-                print("Chequeo de correos con Virus total")
+                print("Consulta Virus total")
             if accion == "api":
                 print("Accion a realizar con las API")
                 
