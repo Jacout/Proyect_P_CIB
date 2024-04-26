@@ -1,5 +1,5 @@
 import argparse
-import portsv2
+import Modulos.portsv2 as portsv2
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -26,9 +26,8 @@ if __name__ == "__main__":
                         help="Please specify the target ports separated by coma[80,8080 by default]", 
                         default = "80,8080")
     args = parser.parse_args()
-    
     #los puertos los convierto en lista
-    puertos = args.ports.split()
+    puertos = args.ports.split(",")  
     
     if args.acciones == "all": #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos
         print("Realizando todas las acciones")
@@ -66,6 +65,3 @@ if __name__ == "__main__":
     
     
     #Si seleccion all ejecute todo
-    
-    
-    import argparse
