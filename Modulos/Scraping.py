@@ -20,7 +20,8 @@ class Scraping:
             bs = BeautifulSoup(response.text, 'lxml')
             
             #create directory for save images
-            os.system("mkdir images")
+            if not os.path.exists("Graficas/images"):
+                os.system("mkdir Graficas/images")
             
             for tagImage in bs.find_all("img"): 
                 #print(tagImage['src'])
@@ -31,7 +32,7 @@ class Scraping:
                 print(download)
                 # download images in img directory
                 r = requests.get(download)
-                f = open('images/%s' % download.split('/')[-1], 'wb')
+                f = open('Graficas/images/%s' % download.split('/')[-1], 'wb')
                 f.write(r.content)
                 f.close()
         
@@ -53,7 +54,7 @@ class Scraping:
             print ('Imagenes %s encontradas' % len(images))
     
             #create directory for save images
-            os.system("mkdir images")
+            #os.system("mkdir images")
     
             for image in images:
                 if image.startswith("http") == False:
@@ -84,7 +85,7 @@ class Scraping:
     
             #create directory for save pdfs
             if len(pdfs) >0:
-                os.system("mkdir pdfs")
+                os.system("mkdir Graficas/pdfs")
         
             print ('Encontrados %s pdf' % len(pdfs))
                 
@@ -97,7 +98,7 @@ class Scraping:
                     
                 # descarga pdfs
                 r = requests.get(download)
-                f = open('pdfs/%s' % download.split('/')[-1], 'wb')
+                f = open('Graficas/pdfs/%s' % download.split('/')[-1], 'wb')
                 f.write(r.content)
                 f.close()
     
@@ -117,11 +118,24 @@ class Scraping:
                 links = parsed_body.xpath('//a/@href')
     
                 print('links %s encontrados' % len(links))
+                n = 0
     
                 for link in links:
-                    print(link)
+                    #checar si existe el archivo txt en la carpeta reportes
+                    if os.path.isfile("Reportes/links.txt") == False:
+                        f = open("Reportes/links.txt","w")
+                        f.write(link)
+                        f.close()
+                    else :
+                        f = open("Reportes/links.txt","a")
+                        f.write(link)
+                        f.close()
                     
+                
             except Exception as e:
                     print(e)
                     print("Error conexion con " + url)
                     pass
+def obtener(url):#recibe los parametros de main y los manda a llamar a cada uno de las clases
+    S = Scraping()
+    S.scrapingBeautifulSoup(url)
