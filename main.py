@@ -28,7 +28,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     #los puertos los convierto en lista
-    puertos = args.ports.split()
+    puertos = args.ports.split(",")
+    print(puertos)
     
     if args.acciones == "all": #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos
         print("Realizando todas las acciones")
