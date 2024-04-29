@@ -3,7 +3,7 @@ import sys
 import socket
 from datetime import datetime
 
-def escaneo(target,puertos):
+def escaneo(target,ports):
 #crea un archivo para ir guaradando la hora de inicio y futura informacion
     hora_inicio= datetime.now()#guarda la hora de inicio del escaneo
     with open("Escaneo de puertos.txt","w") as file:
@@ -18,7 +18,7 @@ def escaneo(target,puertos):
             fileE.write(f"\n El host no existe{hora_inicio}")#guarda el error en el archivo diferente
         sys.exit()
 
-    for port in puertos:
+    for port in ports:
         try:#esta exepcion verifca el tipo de hots que tenemops
         # AF_INET PARA DIRECCIONES IPV4
         # SOCK_STREAM PARA PROTOCOLO TCP

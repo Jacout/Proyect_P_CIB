@@ -1,5 +1,6 @@
 import argparse
-import portsv2
+import Modulos.portsv2 as portsv2
+import Modulos.Scraping as scrap
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -26,26 +27,26 @@ if __name__ == "__main__":
                         help="Please specify the target ports separated by coma[80,8080 by default]", 
                         default = "80,8080")
     args = parser.parse_args()
+    #los puertos los convierto en lista
+    puertos = args.ports.split(",")  
     
     if args.acciones == "all": #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos
         print("Realizando todas las acciones")
     else:
         acciones_especificas = args.acciones.split(",")
-        print(acciones_especificas)
         
         #accion web_scrapping escaneo_puertos metadatos hash correos api
         for accion in acciones_especificas:
             if accion == "web_scraping":
-                print("Realizando web scraping")
+                scrap.obtener(args.objetivo)
             if accion == "escaneo_puertos":
-                print("Realizando Escaneo de puertos")
-                portsv2.escaneo(args.objetivo)
+                portsv2.escaneo(args.objetivo,puertos)
             if accion == "metadatos":
                 print("Realizar metadatos de archivos , verificando si hay archivos")
             if accion == "hash":
                 print("Realizar sacar el valor hash de los archivos de descarga como los generados por reportes")
             if accion == "correos":
-                print("Chequeo de correos con Virus total")
+                print("Consulta Virus total")
             if accion == "api":
                 print("Accion a realizar con las API")
                 
@@ -64,6 +65,3 @@ if __name__ == "__main__":
     
     
     #Si seleccion all ejecute todo
-    
-    
-    import argparse
