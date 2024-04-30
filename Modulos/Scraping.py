@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 #class for scraping
-
+import requests
 import os
 
 import requests
@@ -85,9 +85,7 @@ class Scraping:
     
             #create directory for save pdfs
             if len(pdfs) >0:
-                if not os.path.exists("Graficas/pdfs"):
-                    os.system("mkdir Graficas/pdfs")
-        
+                os.system("mkdir Graficas/pdfs")
         
             print ('Encontrados %s pdf' % len(pdfs))
                 
@@ -138,6 +136,20 @@ class Scraping:
                     print(e)
                     print("Error conexion con " + url)
                     pass
+    
+    def encabezdos(url):
+            r = requests.get(url)
+        if r.status_code != 204:
+            tipo = r.headers['content-type']
+            #guardarlo en un archivo de texto
+            with open("Reportes/respuesta.txt", "w", encoding="utf-8") as f:
+                f.write(tipo)
+
+
+
+
+
 def obtener(url):#recibe los parametros de main y los manda a llamar a cada uno de las clases
     S = Scraping()
     S.scrapingBeautifulSoup(url)
+
