@@ -29,4 +29,3 @@ def scrapingLinks(url):
         pass
 
 # Llamar a la función con la URL deseada
-scrapingLinks("pruba")
