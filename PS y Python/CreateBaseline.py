@@ -1,17 +1,8 @@
-''' 
-Step One Create a baseline hash list of target folder
-December 2018, Python Forensics
+import subprocess      
+import argparse         
+import os               
+import pickle          
 
-'''
-
-''' LIBRARY IMPORT SECTION '''
-
-import subprocess       # subprocess library
-import argparse         # argument parsing library
-import os               # Operating System Path
-import pickle           # Python object serialization 
-
-'''ARGUMENT PARSING SECTION '''
 
 def ValidatePath(thePath):
     ''' Validate the Folder thePath
@@ -29,30 +20,9 @@ def ValidatePath(thePath):
         return thePath
     else:
         raise argparse.ArgumentTypeError('Path is not readable')
-
-#End ValidatePath ===================================
-
-''' Specify and Parse the command line, validate the arguments and return results'''
-info = 'File System Baseline Creator with PowerShell- Version 1.0 December 2018'
-parser = argparse.ArgumentParser(info)
-parser.add_argument('-b', '--baseline',   required=True,
-                    help="Specify the resulting baseline file")
-parser.add_argument('-p', '--Path',       type= ValidatePath,
-                    required=True, help="Specify the target folder to baseline")
-parser.add_argument('-t', '--tmp',        required=True,
-                    help="Specify a temporary result file for the PowerShell Script")
-
-args = parser.parse_args()   
-
-baselineFile = args.baseline
-targetPath   = args.Path
-tmpFile      = args.tmp
-
-''' MAIN SCRIPT SECTION '''
 if __name__ == '__main__':
 
     try:
-        ''' POWERSHELL EXECUTION SECTION '''
         print()
         command = "powershell -ExecutionPolicy ByPass -File HashAcquire.ps1 -TargetFolder "+\
                   targetPath + " -ResultFile " + tmpFile 
@@ -61,7 +31,6 @@ if __name__ == '__main__':
         if powerShellResult.stderr == None:
             input("ya")
         
-            ''' DICTIONARY CREATION SECTION '''
             baseDict = {}
             
             with open(tmpFile, 'r') as inFile:
@@ -86,7 +55,9 @@ if __name__ == '__main__':
         print ("Cannot Create Output File: "+str(err))
         quit()
     
-    
+"""def EnlistarArch(path):
+    arc_list = os.listdir("Ruta")"""
+
     
 
 
