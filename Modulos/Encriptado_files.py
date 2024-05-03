@@ -1,3 +1,4 @@
+#encripta archivos segun Arq. Axel Simon
 def caesar_encrypt(plaintext, shift):
     """Encrypt plaintext using a Caesar cipher with the given shift value."""
     encrypted_text = ""
@@ -14,20 +15,12 @@ def caesar_decrypt(ciphertext, shift):
     return caesar_encrypt(ciphertext, -shift)
 
 # Encrypt the file
-with open('your-file.txt', 'r') as f:
-    plaintext = f.read()
 
-shift = 3
-encrypted_text = caesar_encrypt(plaintext, shift)
+def encriptacion(path):
+    with open('your-file.txt', 'r') as f:
+        plaintext = f.read()
+        shift = 3
+        encrypted_text = caesar_encrypt(plaintext, shift)
 
-with open('your-file.txt.enc', 'w') as f:
-    f.write(encrypted_text)
-
-# Decrypt the file
-with open('your-file.txt.enc', 'r') as f:
-    ciphertext = f.read()
-
-decrypted_text = caesar_decrypt(ciphertext, shift)
-
-with open('your-file.decrypted.txt', 'w') as f:
-    f.write(decrypted_text)
+    with open('your-file.txt.enc', 'w') as f:
+        f.write(encrypted_text)
