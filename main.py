@@ -3,9 +3,8 @@ import Modulos.portsv2 as portsv2
 import Modulos.mod_beatifulsoup_img as imagen
 import Modulos.mod_beatifulsoup_pdf as pdf
 import Modulos.mod_beatifulsoup_url as links
-import Modulos.CifradoCesar2 as CesarAr
+import Modulos.cifradoCesar2 as CesarAr
 import Modulos.Encriptado_files as enFiles
-import Modulos.metadata as metaPDF
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -14,12 +13,10 @@ if __name__ == "__main__":
         + Realizacion de solo una tarea especificadas
         -accion web_scrapping -objetivo <sitio web>
         + Realizacion de algunas tareas especificadas:
-        -accion web_scrapping,escaneo_puertos,metadatos -objetivo <sitio web>
+        -accion web_scrapping,escaneo_puertos -objetivo <sitio web>
         Procesos disponibles:
         web_scraping 
-        escaneo_puertos 
-        metadatos 
-        hash 
+        escaneo_puertos  
         api
         encriptacion_txt
         encriptacion_files"""
@@ -52,10 +49,6 @@ if __name__ == "__main__":
                 links.scrapingLinks(args.objetivo)
             if accion == "escaneo_puertos":
                 portsv2.escaneo(args.objetivo,puertos)
-            if accion == "metadatos":
-                metaPDF.readPDF()
-            if accion == "hash":
-                print("Realizar sacar el valor hash de los archivos de descarga como los generados por reportes")
             if accion == "api":
                 print("Consulta Virus total")
             if accion == "encriptacion_txt":

@@ -2,6 +2,7 @@ import os
 import requests
 from lxml import html
 from bs4 import BeautifulSoup
+import Modulos.metadata as metaPDF
 
 def scrapingPDF(url):
     print("\nObteniendo pdfs de la url: " + url)
@@ -31,11 +32,17 @@ def scrapingPDF(url):
             r = requests.get(download)
             with open('pdfs/' + os.path.basename(download), 'wb') as f:
                 f.write(r.content)
-
     except Exception as e:
         print(e) #guardar esto lo hace mateo
         print("Error conexion con " + url)
         pass
+    # manda a sacar metadatos
+    for pdf in os.listdir('pdfs'):
+        print(pdf)
+        pdf_ruta = os.path.join('pdfs', pdf)
+        print(pdf_ruta)
+        metaPDF.readPDF(pdf_ruta)
+        
 
 # Llamar a la función con la URL deseada
 
