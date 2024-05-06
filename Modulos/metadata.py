@@ -6,31 +6,37 @@ import os
 
 def readPDF(path):
     #Leer PDF y extraer info
-    pdf = open(path, "rb") #En esta variable se asigna el nombre del pdf que se va a utilizar
-    reader = PyPDF2.PdfReader(pdf)
-    meta = reader.metadata
-    if os.path.exists('Reportes\r_metadatos_pdf.txt'):
-        f = open('reportes/meta_pdf.txt','a')
-        f.write("Autor: ",meta.author)
-        f.write("Creador: ",meta.creator)
-        f.write("Producido: ",meta.producer)
-        f.write(meta.subject)
-        f.write("Titulo: ",meta.title)
-        f.close()
-    else:
-        f = open('reportes/meta_pdf.txt','w')
-        f.write("Autor: ",meta.author)
-        f.write("Creador: ",meta.creator)
-        f.write("Producido: ",meta.producer)
-        f.write(meta.subject)
-        f.write("Titulo: ",meta.title)
-        f.close()
+    try:
+        pdf = open(path, "rb") #En esta variable se asigna el nombre del pdf que se va a utilizar
+        reader = PyPDF2.PdfReader(pdf)
+        meta = reader.metadata
+        print(meta)
+        if  os.path.exists('Reportes\r_meta_pdf.txt'):
+            with open('Reportes/r_meta_pdf.txt','a') as f:
+                f.write("Autor: " + str(meta.author))
+                f.write("Creador: " + str(meta.creator))
+                f.write("Producido: " + str(meta.producer))
+                f.write(str(meta.subject))
+                f.write("Titulo: " + str(meta.title))
+            
+        else:
+            with open('Reportes/r_meta_pdf.txt','w') as f:
+                f.write("Autor: " + str(meta.author))
+                f.write("Creador: " + str(meta.creator))
+                f.write("Producido: " + str(meta.producer))
+                f.write(str(meta.subject))
+                f.write("Titulo: " + str(meta.title))
+    except Exception as e:
+            if os.path.exists('Reportes/r_logs_pdf.txt'):
+                with open('Reportes/r_logs_pdf.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+            else:
+                with open('Reportes/r_logs_pdf.txt','w') as fw:
+                    fw.write('Exception: \n' + str(e))
 
 
-#PONER METADATOS PARA FOTOS
+#PONER METADATOS PARA FOTOS y falta poner excepciones saludos mateo
 class metaimg():
-    # -*- encoding: utf-8 -*-
-
     def decode_gps_info(exif):
         gpsinfo = {}
         if 'GPSInfo' in exif:
@@ -52,8 +58,7 @@ class metaimg():
             Lat = Nmult * (Ndeg + (Nmin + Nsec/60.0)/60.0)
             Lng = Wmult * (Wdeg + (Wmin + Wsec/60.0)/60.0)
             exif['GPSInfo'] = {"Lat" : Lat, "Lng" : Lng}
-
- 
+    
     def get_exif_metadata(image_path):
         ret = {}
         image = Image.open(image_path)

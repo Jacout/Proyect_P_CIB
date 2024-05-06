@@ -19,14 +19,11 @@ def scrapingPDF(url):
             if not os.path.exists('pdfs'):
                 os.makedirs('pdfs')
 
-        print('Encontrados %s pdf' % len(pdfs))
-
         for pdf in pdfs:
             if pdf.startswith("http") == False:
                 download = url + pdf
             else:
                 download = pdf
-            print(download)
 
             # descarga pdfs
             r = requests.get(download)
@@ -38,9 +35,7 @@ def scrapingPDF(url):
         pass
     # manda a sacar metadatos
     for pdf in os.listdir('pdfs'):
-        print(pdf)
         pdf_ruta = os.path.join('pdfs', pdf)
-        print(pdf_ruta)
         metaPDF.readPDF(pdf_ruta)
         
 
