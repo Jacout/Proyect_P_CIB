@@ -1,7 +1,8 @@
 import argparse
 import Modulos.portsv2 as portsv2
 import Modulos.Scraping as scrap
-
+import Modulos.mod_beatifulsoup_pdf as pdf
+import Modulos.mod_beatifulsoup_img as img
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
         + Realizacion de todas las tareas
@@ -38,7 +39,8 @@ if __name__ == "__main__":
         #accion web_scrapping escaneo_puertos metadatos hash correos api
         for accion in acciones_especificas:
             if accion == "web_scraping":
-                scrap.obtener(args.objetivo)
+                pdf.scrapingPDF(args.objetivo)
+                img.descargar_imagenes(args.objetivo)
             if accion == "escaneo_puertos":
                 portsv2.escaneo(args.objetivo,puertos)
             if accion == "metadatos":

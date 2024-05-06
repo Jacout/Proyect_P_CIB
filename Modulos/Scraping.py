@@ -138,7 +138,7 @@ class Scraping:
                     pass
     
     def encabezdos(url):
-            r = requests.get(url)
+        r = requests.get(url)
         if r.status_code != 204:
             tipo = r.headers['content-type']
             #guardarlo en un archivo de texto

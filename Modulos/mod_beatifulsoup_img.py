@@ -52,5 +52,6 @@ class Scraper:
             except Exception as e:
                 print('Fallo en la eliminación %s. Razon: %s' % (dir_path, e))
 
-def descargar_imagenes():
-    Scraper.scrapingBeautifulSoup_Imagenes() #falta agregar lo de valores hash
+def descargar_imagenes(url):
+    s=Scraper()
+    s.scrapingBeautifulSoup_Imagenes(url) #falta agregar lo de valores hash
