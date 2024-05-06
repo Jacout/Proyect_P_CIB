@@ -8,6 +8,8 @@ import Modulos.mod_beatifulsoup_img as img
 import Modulos.mod_beatifulsoup_img as imagen
 import Modulos.mod_beatifulsoup_pdf as pdf
 import Modulos.mod_beatifulsoup_url as links
+import Modulos.cifradoCesar2 as CesarAr
+import Modulos.Encriptado_files as enFiles
 
 >>>>>>> origin/argparse
 if __name__ == "__main__":
@@ -17,14 +19,13 @@ if __name__ == "__main__":
         + Realizacion de solo una tarea especificadas
         -accion web_scrapping -objetivo <sitio web>
         + Realizacion de algunas tareas especificadas:
-        -accion web_scrapping,escaneo_puertos,metadatos -objetivo <sitio web>
+        -accion web_scrapping,escaneo_puertos -objetivo <sitio web>
         Procesos disponibles:
         web_scraping 
-        escaneo_puertos 
-        metadatos 
-        hash 
-        correos
-        api"""
+        escaneo_puertos  
+        api
+        encriptacion_txt
+        encriptacion_files"""
     parser = argparse.ArgumentParser(description='Script para investigacion web',epilog=descripcion,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     # Definir el primer argumento que se puede usar para realizar 5 acciones
@@ -34,6 +35,9 @@ if __name__ == "__main__":
     parser.add_argument("-ports", dest="ports", #Parametro de puertos con valor de default
                         help="Please specify the target ports separated by coma[80,8080 by default]", 
                         default = "80,8080")
+    #Argumentos opcionales de encriptacion
+    parser.add_argument('-frase', dest='frase', type=str, help="Frase a encriptar")
+    parser.add_argument('-path' , dest='path', type=str, help="Archivo a encriptar")
     args = parser.parse_args()
     #los puertos los convierto en lista
     puertos = args.ports.split(",")  
@@ -56,14 +60,15 @@ if __name__ == "__main__":
 >>>>>>> origin/argparse
             if accion == "escaneo_puertos":
                 portsv2.escaneo(args.objetivo,puertos)
-            if accion == "metadatos":
-                print("Realizar metadatos de archivos , verificando si hay archivos")
-            if accion == "hash":
-                print("Realizar sacar el valor hash de los archivos de descarga como los generados por reportes")
-            if accion == "correos":
-                print("Consulta Virus total")
             if accion == "api":
-                print("Accion a realizar con las API")
+                print("Consulta Virus total")
+            if accion == "encriptacion_txt":
+                CesarAr.Encriptar(args.frase)
+            if accion == "encriptacion_files":
+                enFiles.encriptacion(args.path)
+
+
+
                 
     #en base a la informacion recolectada se realizan los reportes
     #se manda a llamar a los modulos de generacion de reportes

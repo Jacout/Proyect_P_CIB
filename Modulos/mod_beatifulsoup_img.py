@@ -2,6 +2,8 @@ import os
 import shutil
 import requests
 from bs4 import BeautifulSoup
+import Modulos.metadata as metada
+
 #Crea una clase llamada Scraper
 class Scraper:
     def scrapingBeautifulSoup_Imagenes(self, url):
@@ -39,6 +41,9 @@ class Scraper:
             print(e)
             print("Error conexion " + url)
             pass
+        
+        #obtener directorio y archivos para obtener metadatos
+        #metada.obtenerimg(images_dir)
 
     def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil

@@ -1,3 +1,5 @@
+#Encripta fases segun Arq Axel Simon
+
 def Encriptar(Frase):
     FraseEnc = '' #str vacio
     for letra in Frase: #recorro Frase letra por letra
@@ -36,20 +38,3 @@ abc = {
     'U':'Y', 'V':'Z', 'W':'A', 'X':'B', 'Y':'C',
     'Z':'D'
 }
-print("Menú\n1) Encriptar\n2) Desencriptar\n3) Salir")
-x = int(input("Opción: "))
-while x != 3:
-    if x == 1:
-        frase = input('Frase en texto claro: ')
-        frase = frase.upper()
-        fraseEnc = Encriptar(frase)
-        print(fraseEnc)
-    elif x == 2:
-        frase = input('Frase encriptada: ')
-        frase = frase.upper()
-        print(Desencriptar(frase))
-    else:
-        print("Error! Opción no válida")
-    print("Menú\n1) Encriptar\n2) Desencriptar\n3) Salir")
-    x = int(input("Opción: "))
-    

@@ -29,8 +29,20 @@ def scrapingLinks(url):
         pass
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Llamar a la función con la URL deseada
 scrapingLinks("pruba")
 =======
 # Llamar a la función con la URL deseada
+>>>>>>> origin/argparse
+=======
+# Llamar a la función con la URL deseada
+
+def encabezdos(url):
+        r = requests.get(url)
+        if r.status_code != 204:
+            tipo = r.headers['content-type']
+            #guardarlo en un archivo de texto
+            with open("Reportes/respuesta.txt", "w", encoding="utf-8") as f:
+                f.write(tipo)
 >>>>>>> origin/argparse
