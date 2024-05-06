@@ -28,5 +28,9 @@ def scrapingLinks(url):
         print("Error conexion con " + url)
         pass
 
+<<<<<<< HEAD
 # Llamar a la función con la URL deseada
 scrapingLinks("pruba")
+=======
+# Llamar a la función con la URL deseada
+>>>>>>> origin/argparse

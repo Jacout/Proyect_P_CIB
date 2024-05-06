@@ -53,5 +53,5 @@ class Scraper:
                 print('Fallo en la eliminación %s. Razon: %s' % (dir_path, e))
 
 def descargar_imagenes(url):
-    s=Scraper()
+    s = Scraper()
     s.scrapingBeautifulSoup_Imagenes(url) #falta agregar lo de valores hash

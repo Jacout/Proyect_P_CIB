@@ -33,13 +33,20 @@ def scrapingPDF(url):
                 f.write(r.content)
 
     except Exception as e:
+<<<<<<< HEAD
         print(e)
+=======
+        print(e) #guardar esto lo hace mateo
+>>>>>>> origin/argparse
         print("Error conexion con " + url)
         pass
 
 # Llamar a la función con la URL deseada
+<<<<<<< HEAD
 scrapingPDF("prueba")
 
+=======
+>>>>>>> origin/argparse
 
 #Condigo diferente para prueba se cambio la forma en la que se extraen los pdfs de la pagina con otras funciones de bs
 """
