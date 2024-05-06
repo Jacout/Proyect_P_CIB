@@ -1,7 +1,8 @@
 import subprocess      
 import argparse         
 import os               
-import pickle          
+import pickle     
+import pathlib     
 
 
 def ValidatePath(thePath):
@@ -140,4 +141,11 @@ if __name__ == '__main__':
     except Exception as err:
         print ("Cannot Create Output File: "+str(err))
         quit()
+
+
+
+  
+
     """
+      def archivos_list(path)
+
