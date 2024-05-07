@@ -8,6 +8,6 @@ if response.status_code != 200:
 regExMail = r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+"
 new_emails = set(re.findall(regExMail, response.text, re.I))
 
-file = open("correos.txt","w")
+file = open("Reportes/correos.txt","w")
 for i in new_emails:
     file.write(i + "\n")

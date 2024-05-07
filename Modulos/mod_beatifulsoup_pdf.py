@@ -30,8 +30,14 @@ def scrapingPDF(url):
             with open('pdfs/' + os.path.basename(download), 'wb') as f:
                 f.write(r.content)
     except Exception as e:
-        print(e) #guardar esto lo hace mateo
-        print("Error conexion con " + url)
+        if os.path.exists('Reportes/r_logs_pdf.txt'):
+                with open('Reportes/r_logs_pdf.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+                    fw.write('Error conexion con' + url)
+            else:
+                with open('Reportes/r_logs_pdf.txt','w') as fw:
+                    fw.write('Exception: \n' + str(e))
+                    fw.write('Error conexion con' + url)
         pass
     # manda a sacar metadatos
     for pdf in os.listdir('pdfs'):

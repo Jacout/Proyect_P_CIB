@@ -11,8 +11,6 @@ class Scraper:
         images_dir = "images"
 
         try:
-            print("Obteniendo imagenes con BeautifulSoup " + url)
-
             response = requests.get(url)
             bs = BeautifulSoup(response.text, 'lxml')
 

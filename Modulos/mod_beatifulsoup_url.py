@@ -24,8 +24,14 @@ def scrapingLinks(url):
                 f.write(link['href'] + '\n')
 
     except Exception as e:
-        print(e)
-        print("Error conexion con " + url)
+        if os.path.exists('Reportes/r_logs_url.txt'):
+                with open('Reportes/r_logs_url.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+                    fw.write('Error conexion con' + url)
+            else:
+                with open('Reportes/r_logs_url.txt','w') as fw:
+                    fw.write('Exception: \n' + str(e))
+                    fw.write('Error conexion con' + url)
         pass
 
 # Llamar a la función con la URL deseada

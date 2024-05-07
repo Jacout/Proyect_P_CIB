@@ -51,7 +51,13 @@ if __name__ == '__main__':
             print("PowerShell Error:", p.stderr)
             
     except Exception as err:
-        print ("Cannot Create Output File: "+str(err))
+         if os.path.exists('Reportes/r_logs_baseline.txt'):
+            with open('Reportes/r_logs_baseline.txt','a') as fa:
+                fa.write("Cannot Create Output File: "+str(err))
+        else:
+            with open('Reportes/r_logs_baseline.txt','w') as fa:
+                fa.write("Cannot Create Output File: "+str(err))
+
         quit()
     
 """def EnlistarArch(path):

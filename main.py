@@ -1,10 +1,13 @@
 import argparse
+import os
 import Modulos.portsv2 as portsv2
 import Modulos.mod_beatifulsoup_img as imagen
 import Modulos.mod_beatifulsoup_pdf as pdf
 import Modulos.mod_beatifulsoup_url as links
 import Modulos.cifradoCesar2 as CesarAr
 import Modulos.Encriptado_files as enFiles
+import Modulos.Ps.CreateBaseline as Hashes
+import Modulos.Dominios_VT as api
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -50,15 +53,25 @@ if __name__ == "__main__":
             if accion == "escaneo_puertos":
                 portsv2.escaneo(args.objetivo,puertos)
             if accion == "api":
-                print("Consulta Virus total")
+                api.checar_dom(args.objetivo)
             if accion == "encriptacion_txt":
                 CesarAr.Encriptar(args.frase)
             if accion == "encriptacion_files":
                 enFiles.encriptacion(args.path)
 
 
+def obtener_rutas_archivos(path):
+    for archivo in os.listdir(path):
+        if os.path.isfile(archivo): #da la ruta relativa del archivo
+            Hashes.ValidatePath(archivos)
+        elif os.path.isdir(archivo): #de aqui volver a obtener
+            obtener_rutas_archivos(archivo)
 
-                
+
+ruta_raiz = os.getcwd()
+obtener_rutas_archivos(ruta_raiz)
+
+
     #en base a la informacion recolectada se realizan los reportes
     #se manda a llamar a los modulos de generacion de reportes
     #se exporta la informacion en una carpeta de este proyecto
