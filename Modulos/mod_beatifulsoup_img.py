@@ -36,11 +36,11 @@ class Scraper:
                     print("Error al descargar la imagen: " + download)
 
         except Exception as e:
-             if os.path.exists('Reportes/r_logs_pdf.txt'):
-                with open('Reportes/r_logs_pdf.txt','a') as fw:
+             if os.path.exists('Reportes/r_logs_img.txt'):
+                with open('Reportes/r_logs_img.txt','a') as fw:
                     fw.write('Exception: \n' + str(e))
              else: 
-                with open('Reportes/r_logs_pdf.txt','w') as fw:
+                with open('Reportes/r_logs_img.txt','w') as fw:
                     
     def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil
