@@ -2,8 +2,6 @@ import os
 import shutil
 import requests
 from bs4 import BeautifulSoup
-import Modulos.metadata as metada
-
 #Crea una clase llamada Scraper
 class Scraper:
     def scrapingBeautifulSoup_Imagenes(self, url):
@@ -38,13 +36,12 @@ class Scraper:
                     print("Error al descargar la imagen: " + download)
 
         except Exception as e:
-            print(e)
-            print("Error conexion " + url)
-            pass
-        
-        #obtener directorio y archivos para obtener metadatos
-        #metada.obtenerimg(images_dir)
-
+             if os.path.exists('Reportes/r_logs_pdf.txt'):
+                with open('Reportes/r_logs_pdf.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+             else: 
+                with open('Reportes/r_logs_pdf.txt','w') as fw:
+                    
     def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil
         for filename in os.listdir(dir_path):
