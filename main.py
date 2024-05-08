@@ -8,6 +8,7 @@ import Modulos.cifradoCesar2 as CesarAr
 import Modulos.Encriptado_files as enFiles
 import Modulos.PS.CreateBaseline as Hashes
 import Modulos.Dominios_VT as api
+import Modulos.pdfMaker as pdfcreador
 
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
@@ -62,23 +63,41 @@ if __name__ == "__main__":
             if accion == "encriptacion_files":
                 enFiles.encriptacion(args.path)
 
-def rutas_carpetas(path):
-    for archivo in os.listdir(path):
-        ruta_relativa = os.path.join(path,archivo)
-        Hashes.ValidatePath(ruta_relativa)
+    def rutas_carpetas(path):
+        for archivo in os.listdir(path):
+            ruta_relativa = os.path.join(path,archivo)
+            Hashes.ValidatePath(ruta_relativa)
     
 
-def obtener_rutas_archivos(path):
-    for archivo in os.listdir(path):
-        if os.path.isfile(archivo): #da la ruta relativa del archivo
-            Hashes.ValidatePath(archivo)
-        elif os.path.isdir(archivo): #de aqui volver a obtener
-            Hashes.ValidatePath(archivo)
+    def obtener_rutas_archivos(path):
+        for archivo in os.listdir(path):
+            if os.path.isfile(archivo): #da la ruta relativa del archivo
+                Hashes.ValidatePath(archivo)
+            elif os.path.isdir(archivo): #de aqui volver a obtener
+                Hashes.ValidatePath(archivo)
             
             
-ruta_raiz = os.getcwd()
-obtener_rutas_archivos(ruta_raiz)
+    ruta_raiz = os.getcwd()
+    obtener_rutas_archivos(ruta_raiz)
 
+    #crear pdf
+    ruta_reportes = 'Reportes'
+
+    for archivo in os.listdir(ruta_reportes):
+        if archivo.endswith('.txt'):
+            pdfcreador.crear(archivo)
+            archivolimpiar = os.path.join(ruta_reportes,archivo)
+            try:
+                if os.path.isfile(archivolimpiar) or os.path.islink(archivolimpiar):
+                    os.unlink(archivolimpiar)
+            except Exception as e:
+                if os.path.exists('Reportes/r_logs_archivos.txt'):
+                    with open('Reportes/r_logs_archivos.txt','a') as f:
+                        f.write(f'Error al eliminar {archivolimpiar}. Razón: {e}')
+                else:
+                    with open('Reportes/r_logs_archivos.txt','w') as f:
+                        f.write(f'Error al eliminar {archivolimpiar}. Razón: {e}')
+        
 
     #en base a la informacion recolectada se realizan los reportes
     #se manda a llamar a los modulos de generacion de reportes

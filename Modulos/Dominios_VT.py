@@ -1,6 +1,6 @@
 import requests
 import os
-
+import datetime
 #Cambios para realizar: Hacer que se guarde en un archivo txt, la fecha, hora, el dominio y la respusta del dominio(24/04/2024)
 #Api consumida de VT, apiket guardad en un archivo de python
 def get_domain_report(domain):
@@ -26,6 +26,7 @@ def get_domain_report(domain):
 #Utilizamos los parametros que nos brinda VT para verificar si el dominio es seguro o malicioso
 def is_domain_safe(domain):
     try:
+        fecha = str(datetime.datetime)
         report = get_domain_report(domain)
         if report:
             attributes = report['data']['attributes']
@@ -33,11 +34,11 @@ def is_domain_safe(domain):
                 return True
         return False
     except Exception as e:
-        if os.path.exists('Reportes/r_logs_api.txt'):
-            with open('Reportes/r_logs_api.txt','a') as fa:
+        if os.path.exists(f'Consulta_API/consulta_{fecha}.txt'):
+            with open(f'Consulta_API/consulta_{fecha}.txt','a') as fa:
                 fa.write(e)
         else:
-            with open('Reportes/r_logs_api.txt','w') as fa:
+            with open(f'Consulta_API/consulta_{fecha}.txt','w') as fa:
                 fa.write(e)
 
 

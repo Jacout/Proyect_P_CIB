@@ -23,7 +23,6 @@ class Scraper:
                     download = url + tagImage['src']
                 else:
                     download = tagImage['src']
-                print(download)
                 # Descarga la imagenes y la ingresa en la carpeta images 
                 r = requests.get(download)
                 if r.status_code == 200:
@@ -39,6 +38,7 @@ class Scraper:
                     fw.write('Exception: \n' + str(e))
             else: 
                 with open('Reportes/r_logs_img.txt','w') as fw:
+                    fw.write('Exception: \n' + str(e))
                     
     def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil

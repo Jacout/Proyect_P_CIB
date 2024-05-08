@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 import Modulos.metadata as metaPDF
 
 def scrapingPDF(url):
-    print("\nObteniendo pdfs de la url: " + url)
-
     try:
         response = requests.get(url)
         parsed_body = html.fromstring(response.text)
@@ -40,9 +38,18 @@ def scrapingPDF(url):
                 fw.write('Error conexion con' + url)
         pass
     # manda a sacar metadatos
-    for pdf in os.listdir('pdfs'):
-        pdf_ruta = os.path.join('pdfs', pdf)
-        metaPDF.readPDF(pdf_ruta)
+    if os.path.exists('pdfs'):
+        for pdf in os.listdir('pdfs'):
+            pdf_ruta = os.path.join('pdfs', pdf)
+            metaPDF.readPDF(pdf_ruta)
+    else:
+        if os.path.exists('Reportes/r_logs_pdf.txt'):
+            with open('Reportes/r_logs_pdf.txt','a') as fw:
+                fw.write('Carpea de pdf no existe o no se descargaron')
+        else:
+            with open('Reportes/r_logs_pdf.txt','w') as fw:
+                fw.write('Carpea de pdf no existe o no se descargaron')
+        
         
 
 # Llamar a la función con la URL deseada

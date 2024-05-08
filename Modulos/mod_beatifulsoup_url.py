@@ -4,16 +4,12 @@ from bs4 import BeautifulSoup
 import re
 
 def scrapingLinks(url):
-    print("\nObteniendo links de la url:"+ url)
-
     try:
         response = requests.get(url)
         parsed_body = BeautifulSoup(response.text, 'html.parser')
 
         # expresion regular para obtener links
         links = parsed_body.find_all('a', href=True)
-
-        print('Encontrados %s links' % len(links))
 
         # limpia el txt
         if os.path.exists('Reportes/links.txt'):

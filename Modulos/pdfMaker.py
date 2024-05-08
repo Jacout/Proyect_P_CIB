@@ -18,9 +18,14 @@ class PDF(FPDF):
         self.set_xy((210 - title_width) / 2, 10)
         self.cell(w=title_width, h=10, align='C', txt=title, border=1)
 
-pdf = PDF()
-pdf.add_page()
-pdf.texts('prueba.txt') #AQUI VA EL TXT QUE SE VA A CONVERTIR A PDF
-pdf.add_title('PDF DE PRUEBA') #NOMBRE DEL PDF
-pdf.set_author('ANONIMO') #NOMBRE DEL AUTOR
-pdf.output('prueba.pdf','F') #NOMBRE DEL ARCHIVO
+
+
+
+def crear(archivo):
+    pdf = PDF()
+    pdf.add_page()
+    pdf.texts(archivo) #AQUI VA EL TXT QUE SE VA A CONVERTIR A PDF
+    pdf.add_title(archivo) #NOMBRE DEL PDF
+    pdf.set_author('Bystec') #NOMBRE DEL AUTOR
+    pdf.output(f'Reportes/{archivo}.pdf','F') #NOMBRE DEL 
+    #aqui te mandare txt con lo de arriba para que lo armes agregale mas chopo cynthia pls
