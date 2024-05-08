@@ -41,19 +41,25 @@ if __name__ == "__main__":
     puertos = args.ports.split(",")  
     
     if args.acciones == "all": #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos
-        print("Realizando todas las acciones")
+        imagen.descargar_imagenes(args.objetivo)
+        pdf.scrapingPDF(args.objetivo)
+        links.scrapingLinks(args.objetivo)
+        links.encabezdos(args.objetivo)
+        links.mails(args.objetivo)
+        api.checar_dom(args.objetivo)
+
+
     else:
         acciones_especificas = args.acciones.split(",")
         
         #accion web_scrapping escaneo_puertos metadatos hash correos api
         for accion in acciones_especificas:
             if accion == "web_scraping":
-                pdf.scrapingPDF(args.objetivo)
                 imagen.descargar_imagenes(args.objetivo)
                 pdf.scrapingPDF(args.objetivo)
                 links.scrapingLinks(args.objetivo)
                 links.encabezdos(args.objetivo)
-                links.encabezdos(args.objetivo)
+                links.mails(args.objetivo)
             if accion == "escaneo_puertos":
                 portsv2.escaneo(args.objetivo,puertos)
             if accion == "api":
@@ -66,12 +72,11 @@ if __name__ == "__main__":
     Hashes.sacar_hash(ruta_raiz)
 
     #crear pdf
-    ruta_pdf = 'Reportes/'
+    ruta_pdf = 'Reportes'
     for archivo in os.listdir(ruta_pdf):
         if archivo.endswith('.txt'):
-            print(archivo)
-            pdfcreador.crear(archivo)
             archivolimpiar = os.path.join(ruta_pdf,archivo)
+            pdfcreador.crear(archivo,archivolimpiar)
             try:
                 if os.path.isfile(archivolimpiar) or os.path.islink(archivolimpiar):
                     os.unlink(archivolimpiar)

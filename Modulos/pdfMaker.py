@@ -1,4 +1,5 @@
 from fpdf import FPDF
+import os
 
 class PDF(FPDF):
     pass    
@@ -21,10 +22,11 @@ class PDF(FPDF):
 
 
 
-def crear(archivo):
+def crear(archivo,ruta):
     pdf = PDF()
     pdf.add_page()
-    pdf.texts(archivo) #AQUI VA EL TXT QUE SE VA A CONVERTIR A PDF
-    pdf.add_title(archivo) #NOMBRE DEL PDF
+    pdf.texts(ruta) #AQUI VA EL TXT QUE SE VA A CONVERTIR A PDF
+    nombre , exte = os.path.splitext(archivo)
+    pdf.add_title(nombre) #NOMBRE DEL PDF
     pdf.set_author('Bystec') #NOMBRE DEL AUTOR
-    pdf.output(f'Reportes/{archivo}.pdf','F') #NOMBRE DEL 
+    pdf.output(f'Reportes/{nombre}.pdf','F') #NOMBRE DEL 
