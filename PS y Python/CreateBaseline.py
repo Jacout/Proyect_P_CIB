@@ -2,7 +2,7 @@ import subprocess
 import argparse         
 import os               
 import pickle     
-import pathlib     
+import pathlib as path  
 
 
 def ValidatePath(thePath):
@@ -147,5 +147,4 @@ if __name__ == '__main__':
   
 
     """
-      def archivos_list(path)
 
