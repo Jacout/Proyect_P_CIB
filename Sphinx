@@ -1,0 +1,21 @@
+pip install sphinx 
+
+import sphinx
+
+def create_rst_file(filename, title, content):
+    rst_content = f'={title}=\n\n' + content
+    with open(filename, 'w') as file:
+        file.write(rst_content)
+
+def build_html(sphinx_project, output_dir):
+    sphinx.build_main(['-b', 'html', sphinx_project, output_dir])
+
+# Example usage:
+filename = 'example.rst'
+title = 'Example Title'
+content = 'This is an example file.'
+create_rst_file(filename, title, content)
+
+sphinx_project = '.'
+output_dir = '_build/html'
+build_html(sphinx_project, output_dir)

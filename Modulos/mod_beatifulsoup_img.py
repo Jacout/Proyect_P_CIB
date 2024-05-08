@@ -9,8 +9,6 @@ class Scraper:
         images_dir = "images"
 
         try:
-            print("Obteniendo imagenes con BeautifulSoup " + url)
-
             response = requests.get(url)
             bs = BeautifulSoup(response.text, 'lxml')
 
@@ -25,7 +23,6 @@ class Scraper:
                     download = url + tagImage['src']
                 else:
                     download = tagImage['src']
-                print(download)
                 # Descarga la imagenes y la ingresa en la carpeta images 
                 r = requests.get(download)
                 if r.status_code == 200:
@@ -36,10 +33,13 @@ class Scraper:
                     print("Error al descargar la imagen: " + download)
 
         except Exception as e:
-            print(e)
-            print("Error conexion " + url)
-            pass
-
+            if os.path.exists('Reportes/r_logs_img.txt'):
+                with open('Reportes/r_logs_img.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+            else: 
+                with open('Reportes/r_logs_img.txt','w') as fw:
+                    fw.write('Exception: \n' + str(e))
+                    
     def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil
         for filename in os.listdir(dir_path):
@@ -50,7 +50,12 @@ class Scraper:
                 elif os.path.isdir(dir_path):
                     shutil.rmtree(dir_path)
             except Exception as e:
-                print('Fallo en la eliminación %s. Razon: %s' % (dir_path, e))
-
-def descargar_imagenes():
-    Scraper.scrapingBeautifulSoup_Imagenes() #falta agregar lo de valores hash
+                if os.path.exists('Reportes/r_logs_img.txt'):
+                    with open('Reportes/r_logs_img.txt','a') as fw:
+                        fw.write('Exception: \n' + str(e))
+                else: 
+                    with open('Reportes/r_logs_img.txt','w') as fw:    
+                        fw.write('Exception: \n' +str(e))
+def descargar_imagenes(url):
+    s = Scraper()
+    s.scrapingBeautifulSoup_Imagenes(url) #falta agregar lo de valores hash
