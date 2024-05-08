@@ -2,10 +2,9 @@ import os
 import requests
 from lxml import html
 from bs4 import BeautifulSoup
+import Modulos.metadata as metaPDF
 
 def scrapingPDF(url):
-    print("\nObteniendo pdfs de la url: " + url)
-
     try:
         response = requests.get(url)
         parsed_body = html.fromstring(response.text)
@@ -18,28 +17,42 @@ def scrapingPDF(url):
             if not os.path.exists('pdfs'):
                 os.makedirs('pdfs')
 
-        print('Encontrados %s pdf' % len(pdfs))
-
         for pdf in pdfs:
             if pdf.startswith("http") == False:
                 download = url + pdf
             else:
                 download = pdf
-            print(download)
 
             # descarga pdfs
             r = requests.get(download)
             with open('pdfs/' + os.path.basename(download), 'wb') as f:
                 f.write(r.content)
-
     except Exception as e:
-        print(e)
-        print("Error conexion con " + url)
+        if os.path.exists('Reportes/r_logs_pdf.txt'):
+            with open('Reportes/r_logs_pdf.txt','a') as fw:
+                fw.write('Exception: \n' + str(e))
+                fw.write('Error conexion con' + url)
+        else:
+            with open('Reportes/r_logs_pdf.txt','w') as fw:
+                fw.write('Exception: \n' + str(e))
+                fw.write('Error conexion con' + url)
         pass
+    # manda a sacar metadatos
+    if os.path.exists('pdfs'):
+        for pdf in os.listdir('pdfs'):
+            pdf_ruta = os.path.join('pdfs', pdf)
+            metaPDF.readPDF(pdf_ruta)
+    else:
+        if os.path.exists('Reportes/r_logs_pdf.txt'):
+            with open('Reportes/r_logs_pdf.txt','a') as fw:
+                fw.write('Carpea de pdf no existe o no se descargaron')
+        else:
+            with open('Reportes/r_logs_pdf.txt','w') as fw:
+                fw.write('Carpea de pdf no existe o no se descargaron')
+        
+        
 
 # Llamar a la función con la URL deseada
-scrapingPDF("prueba")
-
 
 #Condigo diferente para prueba se cambio la forma en la que se extraen los pdfs de la pagina con otras funciones de bs
 """

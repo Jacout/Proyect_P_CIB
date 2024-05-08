@@ -1,2 +1,9 @@
 # Ignorar archivos de cache de python}
 **/__pycache__/
+
+#Ignorar carpeta de imagenes
+*/images
+
+
+#ignorar key api
+#.key
