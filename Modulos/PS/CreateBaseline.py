@@ -4,6 +4,7 @@ import os
 import pickle
 import pathlib as path
 
+#editar por favor
 def validate_path(target_path: str) -> None:
     
 
@@ -32,7 +33,12 @@ def valores(target_path: str) -> None:
         )
 
         if power_shell_result.stderr:
-            print(f"Error de PowerShell: {power_shell_result.stderr.decode('utf-8')}")
+            if os.path.exists('Reportes/r_logs_baseline.txt'):
+                with open('Reportes/r_logs_baseline.txt',"a") as f:
+                    f.write(f"Error de PowerShell: {power_shell_result.stderr.decode('utf-8')}")
+            else:
+                with open('Reportes/r_logs_baseline.txt',"w") as f:
+                    f.write(f"Error de PowerShell: {power_shell_result.stderr.decode('utf-8')}")
         else:
             base_dict = {}
 
