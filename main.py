@@ -47,6 +47,7 @@ if __name__ == "__main__":
         #accion web_scrapping escaneo_puertos metadatos hash correos api
         for accion in acciones_especificas:
             if accion == "web_scraping":
+                pdf.scrapingPDF(args.objetivo)
                 imagen.descargar_imagenes(args.objetivo)
                 pdf.scrapingPDF(args.objetivo)
                 links.scrapingLinks(args.objetivo)

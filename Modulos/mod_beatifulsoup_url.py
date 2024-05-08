@@ -35,8 +35,6 @@ def scrapingLinks(url):
                     fw.write('Error conexion con' + url)
         pass
 
-# Llamar a la función con la URL deseada
-
 def encabezdos(url):
         r = requests.get(url)
         if r.status_code != 204:

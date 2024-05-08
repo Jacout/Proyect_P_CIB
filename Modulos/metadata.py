@@ -35,65 +35,87 @@ def readPDF(path):
                     fw.write('Exception: \n' + str(e))
 
 
-#PONER METADATOS PARA FOTOS y falta poner excepciones saludos mateo
 class metaimg():
     def decode_gps_info(exif):
-        gpsinfo = {}
-        if 'GPSInfo' in exif:
-        #Parse geo references.
-            Nsec = exif['GPSInfo'][2][2] 
-            Nmin = exif['GPSInfo'][2][1]
-            Ndeg = exif['GPSInfo'][2][0]
-            Wsec = exif['GPSInfo'][4][2]
-            Wmin = exif['GPSInfo'][4][1]
-            Wdeg = exif['GPSInfo'][4][0]
-            if exif['GPSInfo'][1] == 'N':
-                Nmult = 1
-            else:
-                Nmult = -1
-            if exif['GPSInfo'][1] == 'E':
-                Wmult = 1
-            else:
-                Wmult = -1
-            Lat = Nmult * (Ndeg + (Nmin + Nsec/60.0)/60.0)
-            Lng = Wmult * (Wdeg + (Wmin + Wsec/60.0)/60.0)
-            exif['GPSInfo'] = {"Lat" : Lat, "Lng" : Lng}
+        try: 
+            gpsinfo = {}
+            if 'GPSInfo' in exif:
+            #Parse geo references.
+                Nsec = exif['GPSInfo'][2][2] 
+                Nmin = exif['GPSInfo'][2][1]
+                Ndeg = exif['GPSInfo'][2][0]
+                Wsec = exif['GPSInfo'][4][2]
+                Wmin = exif['GPSInfo'][4][1]
+                Wdeg = exif['GPSInfo'][4][0]
+                if exif['GPSInfo'][1] == 'N':
+                    Nmult = 1
+                else:
+                    Nmult = -1
+                if exif['GPSInfo'][1] == 'E':
+                 Wmult = 1
+                else:
+                    Wmult = -1
+                Lat = Nmult * (Ndeg + (Nmin + Nsec/60.0)/60.0)
+                Lng = Wmult * (Wdeg + (Wmin + Wsec/60.0)/60.0)
+                exif['GPSInfo'] = {"Lat" : Lat, "Lng" : Lng}
+        except Exception as e:
+            if os.path.exists('Reportes/r_logs_meta.txt'):
+                with open('Reportes/r_logs_meta.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+            pass
+        return exif
     
     def get_exif_metadata(image_path):
-        ret = {}
-        image = Image.open(image_path)
-        if hasattr(image, '_getexif'):
-            exifinfo = image._getexif()
-            if exifinfo is not None:
-                for tag, value in exifinfo.items():
-                    decoded = TAGS.get(tag, tag)
-                    ret[decoded] = value
-        decode_gps_info(ret)
-        return ret
+        try:
+            ret = {}
+            image = Image.open(image_path)
+            if hasattr(image, '_getexif'):
+                exifinfo = image._getexif()
+                if exifinfo is not None:
+                    for tag, value in exifinfo.items():
+                        decoded = TAGS.get(tag, tag)
+                        ret[decoded] = value
+            decode_gps_info(ret)
+            return ret
+        except Exception as e:
+            if os.path.exists('Reportes/r_logs_meta.txt'):
+                with open('Reportes/r_logs_meta.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+            pass
+        return exif
     
     def saveMeta(ruta):
-        for root, dirs, files in os.walk(".", topdown=False):
-            for name in files:
-                print(os.path.join(root, name))
-                print ("[+] Metadata for file: %s " %(name))
-                try:
-                    exifData = {}
-                    exif = get_exif_metadata(name)
-                    for metadata in exif:
-                        if os.path.exists('Reportes\r_metadatos_imagenes.txt'):
-                            fimg = open('Reportes\r_metadatos_imagenes.txt','a')
-                            fimg.write('Metadata: %s - Value: %s ' %(metadata,exif[metadata]))
-                            fimg.write('\n')
-                            fimg.close()
-                        else:
-                            fimg = open('Reportes\r_metadatos_imagenes.txt','w')
-                            fimg.write('Metadata: %s - Value: %s ' %(metadata,exif[metadata]))
-                            fimg.write('\n')
-                            fimg.close()
-                except:
-                    import sys, traceback
-                    traceback.print_exc(file=sys.stdout)
-
+        try:
+            for root, dirs, files in os.walk(".", topdown=False):
+                for name in files:
+                    print(os.path.join(root, name))
+                    print ("[+] Metadata for file: %s " %(name))
+                    try:
+                        exifData = {}
+                        exif = get_exif_metadata(name)
+                        for metadata in exif:
+                            if os.path.exists('Reportes\r_metadatos_imagenes.txt'):
+                                fimg = open('Reportes\r_metadatos_imagenes.txt','a')
+                                fimg.write('Metadata: %s - Value: %s ' %(metadata,exif[metadata]))
+                                fimg.write('\n')
+                                fimg.close()
+                            else:
+                                fimg = open('Reportes\r_metadatos_imagenes.txt','w')
+                                fimg.write('Metadata: %s - Value: %s ' %(metadata,exif[metadata]))
+                                fimg.write('\n')
+                                fimg.close()
+                    except:
+                        import sys, traceback
+                        traceback.print_exc(file=sys.stdout)
+        except  Exception as e:
+            if os.path.exists('Reportes/r_logs_meta.txt'):
+                with open('Reportes/r_logs_meta.txt','a') as fw:
+                    fw.write('Exception: \n' + str(e))
+            else: 
+                with open('Reportes/r_logs_pdf.txt','w') as fw: 
+                    fw.write('Exception: \n' + str(e))
+                pass
+    
 def obtenerimg(ruta):
     m = metaimg()
     m.saveMeta(ruta)
