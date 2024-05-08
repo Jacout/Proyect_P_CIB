@@ -1,11 +1,13 @@
 import requests
-import api_keys
+import os
 
 #Cambios para realizar: Hacer que se guarde en un archivo txt, la fecha, hora, el dominio y la respusta del dominio(24/04/2024)
 #Api consumida de VT, apiket guardad en un archivo de python
 def get_domain_report(domain):
     try:
         url = f"https://www.virustotal.com/api/v3/domains/{domain}"
+        with open('API_Keys/api.key','r') as f:
+            api_keys = f.read()
         headers = {"accept": "application/json", "x-apikey": api_keys.api_key}
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
@@ -13,11 +15,10 @@ def get_domain_report(domain):
         else:
             print(f"Error: {response.status_code}")
             return None
-    except as e:
+    except Exception as e:
         if os.path.exists('Reportes/r_logs_api.txt'):
             with open('Reportes/r_logs_api.txt','a') as fa:
                 fa.write(e)
-        
         else:
             with open('Reportes/r_logs_api.txt','w') as fa:
                 fa.write(e)
@@ -31,7 +32,7 @@ def is_domain_safe(domain):
             if attributes['last_analysis_stats']['malicious'] == 0:
                 return True
         return False
-    except as e:
+    except Exception as e:
         if os.path.exists('Reportes/r_logs_api.txt'):
             with open('Reportes/r_logs_api.txt','a') as fa:
                 fa.write(e)
@@ -58,4 +59,4 @@ def checar_dom(url):
                 fa.write(f'El dominio {url} puede no ser seguro')
         else:
             with open('Reportes/dominio_safe.txt','w') as fa:
-                fa.write(f'El dominio {url} puede no ser seguro'))
+                fa.write(f'El dominio {url} puede no ser seguro')

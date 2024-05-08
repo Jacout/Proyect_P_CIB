@@ -11,8 +11,9 @@ def Encriptar(Frase):
         if not encontrado: #if encontrado == False
                             # if encontrado != True
             FraseEnc += letra
-    return FraseEnc
-    
+    with open('Reportes/frase_ecriptada.txt') as fe:
+        fe.write("Frase encriptada \n")
+        fe.write(FraseEnc)    
 def Desencriptar(Frase):
     FraseDes = ''
     for letra in Frase:

@@ -17,10 +17,10 @@ def caesar_decrypt(ciphertext, shift):
 # Encrypt the file
 
 def encriptacion(path):
-    with open('your-file.txt', 'r') as f:
+    with open(path, 'r') as f:
         plaintext = f.read()
         shift = 3
         encrypted_text = caesar_encrypt(plaintext, shift)
 
-    with open('your-file.txt.enc', 'w') as f:
+    with open(f'{path}.enc', 'w') as f:
         f.write(encrypted_text)

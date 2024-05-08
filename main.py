@@ -6,7 +6,7 @@ import Modulos.mod_beatifulsoup_pdf as pdf
 import Modulos.mod_beatifulsoup_url as links
 import Modulos.cifradoCesar2 as CesarAr
 import Modulos.Encriptado_files as enFiles
-import Modulos.Ps.CreateBaseline as Hashes
+import Modulos.PS.CreateBaseline as Hashes
 import Modulos.Dominios_VT as api
 
 if __name__ == "__main__":
@@ -50,6 +50,8 @@ if __name__ == "__main__":
                 imagen.descargar_imagenes(args.objetivo)
                 pdf.scrapingPDF(args.objetivo)
                 links.scrapingLinks(args.objetivo)
+                links.encabezdos(args.objetivo)
+                links.encabezdos(args.objetivo)
             if accion == "escaneo_puertos":
                 portsv2.escaneo(args.objetivo,puertos)
             if accion == "api":
@@ -59,15 +61,20 @@ if __name__ == "__main__":
             if accion == "encriptacion_files":
                 enFiles.encriptacion(args.path)
 
+def rutas_carpetas(path):
+    for archivo in os.listdir(path):
+        ruta_relativa = os.path.join(path,archivo)
+        Hashes.ValidatePath(ruta_relativa)
+    
 
 def obtener_rutas_archivos(path):
     for archivo in os.listdir(path):
         if os.path.isfile(archivo): #da la ruta relativa del archivo
-            Hashes.ValidatePath(archivos)
+            Hashes.ValidatePath(archivo)
         elif os.path.isdir(archivo): #de aqui volver a obtener
-            obtener_rutas_archivos(archivo)
-
-
+            Hashes.ValidatePath(archivo)
+            
+            
 ruta_raiz = os.getcwd()
 obtener_rutas_archivos(ruta_raiz)
 
@@ -75,7 +82,6 @@ obtener_rutas_archivos(ruta_raiz)
     #en base a la informacion recolectada se realizan los reportes
     #se manda a llamar a los modulos de generacion de reportes
     #se exporta la informacion en una carpeta de este proyecto
-    print("Objetivo:", args.objetivo)
         
     
     #web scraping opcional
