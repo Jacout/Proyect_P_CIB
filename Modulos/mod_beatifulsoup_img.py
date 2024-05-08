@@ -42,18 +42,18 @@ class Scraper:
              else: 
                 with open('Reportes/r_logs_img.txt','w') as fw:
                     
-    def limpiar_directorio(self, dir_path):
+        def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil
-        for filename in os.listdir(dir_path):
-            dir_path = os.path.join(dir_path, filename)
-            try:
-                if os.path.isfile(dir_path) or os.path.islink(dir_path):
-                    os.unlink(dir_path)
-                elif os.path.isdir(dir_path):
-                    shutil.rmtree(dir_path)
-            except Exception as e:
-                print('Fallo en la eliminación %s. Razon: %s' % (dir_path, e))
-
+            for filename in os.listdir(dir_path):
+                dir_path = os.path.join(dir_path, filename)
+                try:
+                    if os.path.isfile(dir_path) or os.path.islink(dir_path):
+                        os.unlink(dir_path)
+                    elif os.path.isdir(dir_path):
+                        shutil.rmtree(dir_path)
+                except Exception as e:
+                    print('Fallo en la eliminación %s. Razon: %s' % (dir_path, e))
+    
 def descargar_imagenes(url):
     s = Scraper()
     s.scrapingBeautifulSoup_Imagenes(url) #falta agregar lo de valores hash
