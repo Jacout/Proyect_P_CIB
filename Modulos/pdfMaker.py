@@ -28,4 +28,3 @@ def crear(archivo):
     pdf.add_title(archivo) #NOMBRE DEL PDF
     pdf.set_author('Bystec') #NOMBRE DEL AUTOR
     pdf.output(f'Reportes/{archivo}.pdf','F') #NOMBRE DEL 
-    #aqui te mandare txt con lo de arriba para que lo armes agregale mas chopo cynthia pls

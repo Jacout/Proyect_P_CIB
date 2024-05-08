@@ -62,31 +62,16 @@ if __name__ == "__main__":
                 CesarAr.Encriptar(args.frase)
             if accion == "encriptacion_files":
                 enFiles.encriptacion(args.path)
-
-    def rutas_carpetas(path):
-        for archivo in os.listdir(path):
-            ruta_relativa = os.path.join(path,archivo)
-            Hashes.ValidatePath(ruta_relativa)
-    
-
-    def obtener_rutas_archivos(path):
-        for archivo in os.listdir(path):
-            if os.path.isfile(archivo): #da la ruta relativa del archivo
-                Hashes.ValidatePath(archivo)
-            elif os.path.isdir(archivo): #de aqui volver a obtener
-                Hashes.ValidatePath(archivo)
-            
-            
     ruta_raiz = os.getcwd()
-    obtener_rutas_archivos(ruta_raiz)
+    Hashes.sacar_hash(ruta_raiz)
 
     #crear pdf
-    ruta_reportes = 'Reportes'
-
-    for archivo in os.listdir(ruta_reportes):
+    ruta_pdf = 'Reportes/'
+    for archivo in os.listdir(ruta_pdf):
         if archivo.endswith('.txt'):
+            print(archivo)
             pdfcreador.crear(archivo)
-            archivolimpiar = os.path.join(ruta_reportes,archivo)
+            archivolimpiar = os.path.join(ruta_pdf,archivo)
             try:
                 if os.path.isfile(archivolimpiar) or os.path.islink(archivolimpiar):
                     os.unlink(archivolimpiar)
