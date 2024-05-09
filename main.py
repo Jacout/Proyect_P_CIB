@@ -6,7 +6,7 @@ import Modulos.mod_beatifulsoup_pdf as pdf
 import Modulos.mod_beatifulsoup_url as links
 import Modulos.cifradoCesar2 as CesarAr
 import Modulos.Encriptado_files as enFiles
-import Modulos.PS.CreateBaseline as Hashes
+import Modulos.Crearbase as Hash
 import Modulos.Dominios_VT as api
 import Modulos.pdfMaker as pdfcreador
 
@@ -68,8 +68,19 @@ if __name__ == "__main__":
                 CesarAr.Encriptar(args.frase)
             if accion == "encriptacion_files":
                 enFiles.encriptacion(args.path)
+    
+    def subdirectorio(ruta): #obtener subdirectorio y mandar solo los folders
+        for archivo in os.listdir(ruta):
+            if os.path.isdir(archivo):
+                subdirectorio(archivo)
+                ruta = os.path.abspath(archivo)
+                Hash.obtener(ruta,archivo)
+                
     ruta_raiz = os.getcwd()
-    Hashes.sacar_hash(ruta_raiz)
+    Hash.obtener(ruta_raiz,'Raiz')
+    
+    subdirectorio(ruta_raiz)
+    
 
     #crear pdf
     ruta_pdf = 'Reportes'
