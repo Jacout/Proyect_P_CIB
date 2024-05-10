@@ -1,4 +1,4 @@
-#encripta archivos segun Arq. Axel Simon
+#encripta archivos txt
 def caesar_encrypt(plaintext, shift):
     """Encrypt plaintext using a Caesar cipher with the given shift value."""
     encrypted_text = ""

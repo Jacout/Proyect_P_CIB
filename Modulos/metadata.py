@@ -33,6 +33,7 @@ def readPDF(path):
             else:
                 with open('Reportes/r_logs_pdf.txt','w') as fw:
                     fw.write('Exception: \n' + str(e))
+            pass
 
 
 class metaimg():
@@ -58,6 +59,7 @@ class metaimg():
                 Lat = Nmult * (Ndeg + (Nmin + Nsec/60.0)/60.0)
                 Lng = Wmult * (Wdeg + (Wmin + Wsec/60.0)/60.0)
                 exif['GPSInfo'] = {"Lat" : Lat, "Lng" : Lng}
+            return exif
         except Exception as e:
             if os.path.exists('Reportes/r_logs_meta.txt'):
                 with open('Reportes/r_logs_meta.txt','a') as fw:
@@ -65,7 +67,7 @@ class metaimg():
             else:
                 with open('Reportes/r_logs_meta.txt','w') as fw:
                     fw.write('Exception: \n' + str(e))
-        return exif
+            pass
     
     def get_exif_metadata(self,image_path):
         ret = {}
@@ -86,6 +88,7 @@ class metaimg():
             else:
                 with open('Reportes/r_logs_meta.txt','w') as fw:
                     fw.write('Exception: \n' + str(e))
+            pass
     
     def saveMeta(self,ruta):
         try:
@@ -115,6 +118,7 @@ class metaimg():
                         else:
                             with open('Reportes/r_logs_meta.txt','w') as fw:
                                 fw.write('Exception: \n' + str(e) + str(file=sys.stdout))
+                        pass
         except  Exception as e:
             if os.path.exists('Reportes/r_logs_meta.txt'):
                 with open('Reportes/r_logs_meta.txt','a') as fw:

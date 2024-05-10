@@ -33,8 +33,13 @@ class Scraper:
                     f.write(r.content)
                     f.close()
                 else:
-                    print("Error al descargar la imagen: " + download)
-
+                    if os.path.exists('Reportes/r_logs_img.txt'):
+                        with open('Reportes/r_logs_img.txt','a') as fw:
+                            fw.write("Error al descargar la imagen: " + download)
+                    else: 
+                        with open('Reportes/r_logs_img.txt','w') as fw:
+                            fw.write("Error al descargar la imagen: " + download)
+                        
         except Exception as e:
             if os.path.exists('Reportes/r_logs_img.txt'):
                 with open('Reportes/r_logs_img.txt','a') as fw:
@@ -64,4 +69,4 @@ class Scraper:
                         fw.write('Exception: \n' +str(e))
 def descargar_imagenes(url):
     s = Scraper()
-    s.scrapingBeautifulSoup_Imagenes(url) #falta agregar lo de valores hash
+    s.scrapingBeautifulSoup_Imagenes(url)

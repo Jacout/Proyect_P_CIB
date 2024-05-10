@@ -4,7 +4,6 @@ import Modulos.portsv2 as portsv2
 import Modulos.mod_beatifulsoup_img as imagen
 import Modulos.mod_beatifulsoup_pdf as pdf
 import Modulos.mod_beatifulsoup_url as links
-import Modulos.cifradoCesar2 as CesarAr
 import Modulos.Encriptado_files as enFiles
 import Modulos.Crearbase as Hash
 import Modulos.Dominios_VT as api
@@ -22,8 +21,7 @@ if __name__ == "__main__":
         web_scraping 
         escaneo_puertos  
         api
-        encriptacion_txt
-        encriptacion_files"""
+        encriptacion_file"""
     parser = argparse.ArgumentParser(description='Script para investigacion web',epilog=descripcion,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     # Definir el primer argumento que se puede usar para realizar 5 acciones
@@ -34,7 +32,6 @@ if __name__ == "__main__":
                         help="Please specify the target ports separated by coma[80,8080 by default]", 
                         default = "80,8080")
     #Argumentos opcionales de encriptacion
-    parser.add_argument('-frase', dest='frase', type=str, help="Frase a encriptar")
     parser.add_argument('-path' , dest='path', type=str, help="Archivo a encriptar")
     args = parser.parse_args()
     #los puertos los convierto en lista
@@ -64,9 +61,7 @@ if __name__ == "__main__":
                 portsv2.escaneo(args.objetivo,puertos)
             if accion == "api":
                 api.checar_dom(args.objetivo)
-            if accion == "encriptacion_txt":
-                CesarAr.Encriptar(args.frase)
-            if accion == "encriptacion_files":
+            if accion == "encriptacion_file":
                 enFiles.encriptacion(args.path)
     
     def subdirectorio(ruta): #obtener subdirectorio y mandar solo los folders

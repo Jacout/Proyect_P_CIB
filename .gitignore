@@ -1,9 +1,10 @@
 # Ignorar archivos de cache de python}
 **/__pycache__/
+**/Lib
 
 #Ignorar carpeta de imagenes
-*/images
-
+**/images
+**/pdfs
 
 #ignorar key api
 #.key
