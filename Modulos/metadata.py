@@ -77,7 +77,7 @@ class metaimg():
                     for tag, value in exifinfo.items():
                         decoded = TAGS.get(tag, tag)
                         ret[decoded] = value
-            self.decode_gps_info(ret)
+            ret = self.decode_gps_info(ret)
             return ret
         except Exception as e:
             if os.path.exists('Reportes/r_logs_meta.txt'):
@@ -115,8 +115,6 @@ class metaimg():
                         else:
                             with open('Reportes/r_logs_meta.txt','w') as fw:
                                 fw.write('Exception: \n' + str(e) + str(file=sys.stdout))
-                        import sys, traceback
-                        traceback.print_exc(file=sys.stdout)
         except  Exception as e:
             if os.path.exists('Reportes/r_logs_meta.txt'):
                 with open('Reportes/r_logs_meta.txt','a') as fw:
