@@ -2,8 +2,11 @@ import os
 import shutil
 import requests
 from bs4 import BeautifulSoup
+from Modulos.metadata import metaimg as metaimg
 #Crea una clase llamada Scraper
 class Scraper:
+    
+    
     def scrapingBeautifulSoup_Imagenes(self, url):
         # Ruta del directorio de imagenes
         images_dir = "images"
@@ -39,6 +42,9 @@ class Scraper:
             else: 
                 with open('Reportes/r_logs_img.txt','w') as fw:
                     fw.write('Exception: \n' + str(e))
+        if os.path.exists(images_dir):
+            m = metaimg()
+            m.saveMeta(images_dir)
                     
     def limpiar_directorio(self, dir_path):
         # En esta funcion hace que despues de cada petición diferente se eliminen las imagenes de la anterior petición se utulizo la librería shtil
