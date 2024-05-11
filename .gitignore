@@ -2,10 +2,12 @@
 **/__pycache__/
 **/Lib
 **/Scripts
+/.git
 
 #Ignorar carpeta de imagenes
 **/images
 **/pdfs
+*/proyect_env
 
 #ignorar key api
 #.key
