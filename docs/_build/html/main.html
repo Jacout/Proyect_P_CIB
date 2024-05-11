@@ -80,6 +80,87 @@
              
   <section id="main-module">
 <h1>main module<a class="headerlink" href="#main-module" title="Link to this heading"></a></h1>
+<p>import argparse
+import Modulos.portsv2 as portsv2
+import Modulos.mod_beatifulsoup_img as imagen
+import Modulos.mod_beatifulsoup_pdf as pdf
+import Modulos.mod_beatifulsoup_url as links
+import Modulos.cifradoCesar2 as CesarAr
+import Modulos.Encriptado_files as enFiles</p>
+<dl>
+<dt>if __name__ == “__main__”:</dt><dd><dl>
+<dt>descripcion = “””EJEMPLOS DE USO</dt><dd><ul class="simple">
+<li><p>Realizacion de todas las tareas</p></li>
+</ul>
+<p>-accion all -objetivo &lt;sitio web&gt;
++ Realizacion de solo una tarea especificadas
+-accion web_scrapping -objetivo &lt;sitio web&gt;
++ Realizacion de algunas tareas especificadas:
+-accion web_scrapping,escaneo_puertos -objetivo &lt;sitio web&gt;
+Procesos disponibles:
+web_scraping
+escaneo_puertos
+api
+encriptacion_txt
+encriptacion_files”””</p>
+</dd>
+<dt>parser = argparse.ArgumentParser(description=’Script para investigacion web’,epilog=descripcion,</dt><dd><p>formatter_class=argparse.RawDescriptionHelpFormatter)</p>
+</dd>
+</dl>
+<p># Definir el primer argumento que se puede usar para realizar 5 acciones
+parser.add_argument(‘-accion’, dest=’acciones’,</p>
+<blockquote>
+<div><p>type=str, help=’Especificar los procesos a realizar [all default]’, default= ‘all’)</p>
+</div></blockquote>
+<p>parser.add_argument(‘-objetivo’, dest=’objetivo’,type=str, help=”Sitio objetivo”, required=True)
+parser.add_argument(“-ports”, dest=”ports”, #Parametro de puertos con valor de default</p>
+<blockquote>
+<div><p>help=”Please specify the target ports separated by coma[80,8080 by default]”,
+default = “80,8080”)</p>
+</div></blockquote>
+<p>#Argumentos opcionales de encriptacion
+parser.add_argument(‘-frase’, dest=’frase’, type=str, help=”Frase a encriptar”)
+parser.add_argument(‘-path’ , dest=’path’, type=str, help=”Archivo a encriptar”)
+args = parser.parse_args()
+#los puertos los convierto en lista
+puertos = args.ports.split(“,”)</p>
+<dl>
+<dt>if args.acciones == “all”: #si la entrada del parametro es all ejecuta todas las acciones, es decir manda a llamar a los modulos</dt><dd><p>print(“Realizando todas las acciones”)</p>
+</dd>
+<dt>else:</dt><dd><p>acciones_especificas = args.acciones.split(“,”)</p>
+<p>#accion web_scrapping escaneo_puertos metadatos hash correos api
+for accion in acciones_especificas:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if accion == “web_scraping”:</dt><dd><p>imagen.descargar_imagenes(args.objetivo)
+pdf.scrapingPDF(args.objetivo)
+links.scrapingLinks(args.objetivo)</p>
+</dd>
+<dt>if accion == “escaneo_puertos”:</dt><dd><p>portsv2.escaneo(args.objetivo,puertos)</p>
+</dd>
+<dt>if accion == “api”:</dt><dd><p>print(“Consulta Virus total”)</p>
+</dd>
+<dt>if accion == “encriptacion_txt”:</dt><dd><p>CesarAr.Encriptar(args.frase)</p>
+</dd>
+<dt>if accion == “encriptacion_files”:</dt><dd><p>enFiles.encriptacion(args.path)</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+<p>#en base a la informacion recolectada se realizan los reportes
+#se manda a llamar a los modulos de generacion de reportes
+#se exporta la informacion en una carpeta de este proyecto
+print(“Objetivo:”, args.objetivo)</p>
+<p>#web scraping opcional
+#Escaneo de puertos e ip opcional
+#Metadatos opcional si hay documentos o archivos en la pagina en base al web scrapping
+#hash obligatorio, checar si tienen los archivos
+#Virus total en base al chequeo de los correos
+#y api que van a usar dependiendo opcional tambien</p>
+<p>#Si seleccion all ejecute todo</p>
+</dd>
+</dl>
 </section>
 
 
