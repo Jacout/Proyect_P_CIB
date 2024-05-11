@@ -1,6 +1,7 @@
 # Ignorar archivos de cache de python}
 **/__pycache__/
 **/Lib
+**/Scripts
 
 #Ignorar carpeta de imagenes
 **/images
