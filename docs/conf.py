@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.abspath(".."))
 
 
 project = 'PIA'
-copyright = '2024, MATTHEW'
-author = 'MATTHEW'
+copyright = '2024, Bystec'
+author = 'Equipo de Bystec'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
