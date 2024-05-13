@@ -10,7 +10,6 @@ def readPDF(path):
         pdf = open(path, "rb") #En esta variable se asigna el nombre del pdf que se va a utilizar
         reader = PyPDF2.PdfReader(pdf)
         meta = reader.metadata
-        print(meta)
         if  os.path.exists('Reportes\r_meta_pdf.txt'):
             with open('Reportes/r_meta_pdf.txt','a') as f:
                 f.write("Autor: " + str(meta.author))
@@ -94,8 +93,6 @@ class metaimg():
         try:
             for root, dirs, files in os.walk(".", topdown=False):
                 for name in files:
-                    print(os.path.join(root, name))
-                    print ("[+] Metadata for file: %s " %(name))
                     try:
                         exifData = {}
                         exif = self.get_exif_metadata(name)
