@@ -10,20 +10,6 @@ import Modulos.Dominios_VT as api
 import Modulos.pdfMaker as pdfcreador
 
 
-"""
-Script de arranque
-EJEMPLOS DE USO
-        + Realizacion de todas las tareas
-        -accion all -objetivo <sitio web>
-        + Realizacion de solo una tarea especificadas
-        -accion web_scrapping -objetivo <sitio web>
-        + Realizacion de algunas tareas especificadas:
-        -accion web_scrapping,escaneo_puertos -objetivo <sitio web>
-        Procesos disponibles:
-        web_scraping 
-        escaneo_puertos  
-        api
-"""
 if __name__ == "__main__":
     descripcion = """EJEMPLOS DE USO
         + Realizacion de todas las tareas

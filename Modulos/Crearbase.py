@@ -2,11 +2,6 @@ import subprocess       # subprocess library
 import os               # Operating System Path
 import pickle           # Python object serialization 
 
-    """
-    Aqui se genera los valores hash en base a los archivos
-    
-    
-    """
 def obtener(path,carpeta):
 
     try:
