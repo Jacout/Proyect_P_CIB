@@ -7,7 +7,8 @@
 #Ignorar carpeta de imagenes
 **/images
 **/pdfs
-*/proyect_env
+**/env
+**/docs
 
 #ignorar key api
 #.key
