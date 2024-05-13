@@ -1,0 +1,31 @@
+main module
+===========
+
+.. automodule:: main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Script de arranque
+EJEMPLOS DE USO
+
++ Realizacion de todas las tareas
+-accion all -objetivo <sitio web>
+
++ Realizacion de solo una tarea especificadas
+-accion web_scrapping -objetivo <sitio web>
+
++ Realizacion de algunas tareas especificadas:
+-accion web_scrapping,escaneo_puertos -objetivo <sitio web>
+
+Procesos disponibles:
+
+web_scraping 
+
+escaneo_puertos  
+
+api
+
+Algunas diferentes tareas que realiza, es la elaboracion de reportes, y extraccion de metadatos
+de imagenes descargadas y valores hash de los archivos generados.

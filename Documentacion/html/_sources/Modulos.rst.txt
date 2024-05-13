@@ -1,0 +1,99 @@
+Modulos package
+===============
+
+Submodules
+----------
+
+Modulos.Crearbase module
+------------------------
+En este modulo se recibe los directorios con los archivos que se guardaron.
+
+Para posterior mandar cada ruta de los directorio para obtener los valores hash de cada uno.
+
+.. automodule:: Modulos.Crearbase
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.Dominios\_VT module
+---------------------------
+En este modulo se consulta en la api de Virus total que el sitio web ingresado sea seguro o no.
+
+.. automodule:: Modulos.Dominios_VT
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.Encriptado\_files module
+--------------------------------
+Modulo el cual se encripta los archivos generados en reportes por txt, y los exporta.
+
+.. automodule:: Modulos.Encriptado_files
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.metadata module
+-----------------------
+Modulo el cual obtiene los metadatos de los archivos descargados:
+   + PDF
+   + IMAGENES
+.. automodule:: Modulos.metadata
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+
+Modulos.mod\_beatifulsoup\_img module
+-------------------------------------
+Modulo cual realiza el scraping del sitio web ingresado, obtiene imagenes principalmente.
+
+.. automodule:: Modulos.mod_beatifulsoup_img
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.mod\_beatifulsoup\_pdf module
+-------------------------------------
+Modulo cual realiza el scraping del sitio web ingresado, obtiene archivos pdf principalmente.
+
+.. automodule:: Modulos.mod_beatifulsoup_pdf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.mod\_beatifulsoup\_url module
+-------------------------------------
+Modulo cual realiza el scraping del sitio web ingresado, obtiene url's principalmente.
+
+.. automodule:: Modulos.mod_beatifulsoup_url
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.pdfMaker module
+-----------------------
+Modulo el cual a partir de los reportes de salida en txt los convierte en pdf.
+
+.. automodule:: Modulos.pdfMaker
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Modulos.portsv2 module
+----------------------
+Modulo que con ayuda de socket el escaneo de puertos.
+
+.. automodule:: Modulos.portsv2
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: Modulos
+   :members:
+   :undoc-members:
+   :show-inheritance:

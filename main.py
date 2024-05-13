@@ -63,10 +63,19 @@ if __name__ == "__main__":
     
     def subdirectorio(ruta): #obtener subdirectorio y mandar solo los folders
         for archivo in os.listdir(ruta):
-            if os.path.isdir(archivo):
-                subdirectorio(archivo)
-                ruta = os.path.abspath(archivo)
-                Hash.obtener(ruta,archivo)
+            """_summary_
+
+            Args:
+            ruta (_type_): _description_
+            Si es la carpeta .git se ignora
+            """
+            if archivo == ".git":
+                pass
+            else:
+                if os.path.isdir(archivo):
+                    subdirectorio(archivo)
+                    ruta = os.path.abspath(archivo)
+                    Hash.obtener(ruta,archivo)
                 
     ruta_raiz = os.getcwd()
     Hash.obtener(ruta_raiz,'Raiz')
