@@ -93,8 +93,6 @@ class metaimg():
         try:
             for root, dirs, files in os.walk(".", topdown=False):
                 for name in files:
-                    print(os.path.join(root, name))
-                    print ("[+] Metadata for file: %s " %(name))
                     try:
                         exifData = {}
                         exif = self.get_exif_metadata(name)
