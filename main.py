@@ -69,6 +69,7 @@ if __name__ == "__main__":
             ruta (_type_): _description_
             Si es la carpeta .git se ignora
             """
+          
             if os.path.isdir(archivo):
                 subdirectorio(archivo)
                 ruta = os.path.abspath(archivo)
